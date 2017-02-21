@@ -18,5 +18,13 @@ use Illuminate\Support\Facades\Redis;
 // 3. the socket.io to emit to all clients
 
 Route::get('/', function () {
+    $data = [
+      'event' => 'UserSignedUp',
+      'data'  => [
+        'username' => 'Hamer'
+      ]
+    ]
+    Redis::publish('test-channel',json_encode($data));
+    return "Done";
     // return view('welcome');
 });
